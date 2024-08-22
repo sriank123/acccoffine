@@ -4,11 +4,8 @@
   border-bottom: 1px solid #ddd;
   display: flex;
   flex-direction: column;
-  line-height: 1.5; /* Adjusted to a more typical line-height */
+  line-height: 1.5; 
   margin-bottom: 10px;
-  background-image: url('https://example.com/image.jpg'); /* Corrected syntax */
-  background-size: cover; /* Optional: makes the background cover the entire area */
-  background-position: center; /* Optional: centers the background image */
 }
 
 .specialties-list li {
@@ -31,6 +28,7 @@
   margin-bottom: 10px; /* Optional */
   padding: 0;
   margin: 0;
+  background: url('/about.png') no-repeat center center;
 }
 
 .about-section li {
@@ -44,5 +42,4 @@
 .about-section li::before {
   margin-right: 10px;
   color: #999;
-  content: '•'; /* Optional: adds a bullet point before each list item */
 }
