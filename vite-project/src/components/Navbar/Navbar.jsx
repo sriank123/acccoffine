@@ -4,22 +4,9 @@ import { assets } from '../../assets/assets';
 import { Link } from 'react-router-dom';
 import { StoreContext } from '../../context/StoreContext';
 
-const scrollToTop = () => {
-  window.scrollTo(0, 0);
-};
-
-const scrollToMid = () => {
-  const windowHeight = window.innerHeight;
-  const documentHeight = document.body.offsetHeight;
-  const middlePosition = (documentHeight - windowHeight) / 2.7;
-  window.scrollTo(0, middlePosition);
-};
-
-const scrollToend = () => {
-  const windowHeight = window.innerHeight;
-  const documentHeight = document.body.offsetHeight;
-  const middlePosition = (documentHeight - windowHeight) / 1.0;
-  window.scrollTo(0, middlePosition);
+// Utility functions for scrolling
+const scrollToPosition = (position) => {
+  window.scrollTo(0, position);
 };
 
 const Navbar = ({ setShowLogin }) => {
@@ -28,6 +15,7 @@ const Navbar = ({ setShowLogin }) => {
   const [searchTerm, setSearchTerm] = useState('');
   const [showSearchInput, setShowSearchInput] = useState(false);
   const [searchedMenuItems, setSearchedMenuItems] = useState([]);
+
   const menuItems = [
     { id: 1, name: 'Muffins' },
     { id: 2, name: 'Cinnamon Rolls' },
@@ -41,10 +29,10 @@ const Navbar = ({ setShowLogin }) => {
 
   const handleSearch = (e) => {
     e.preventDefault();
-    const searchedMenuItems = menuItems.filter((item) => {
-      return item.name.toLowerCase().includes(searchTerm.toLowerCase());
-    });
-    setSearchedMenuItems(searchedMenuItems);
+    const filteredItems = menuItems.filter(item =>
+      item.name.toLowerCase().includes(searchTerm.toLowerCase())
+    );
+    setSearchedMenuItems(filteredItems);
   };
 
   const toggleSearchInput = () => {
@@ -53,15 +41,33 @@ const Navbar = ({ setShowLogin }) => {
 
   return (
     <div className='navbar'>
-      <Link to='/'><img src={assets.logo} alt="" className="logo" /></Link>
+      <Link to='/'><img src={assets.logo} alt="Logo" className="logo" /></Link>
       <ul className="navbar-menu">
-        <Link to='/' key='home' onClick={() => { setMenu("home"); scrollToTop(); }} className={menu === "home" ? "active" : ""}>home</Link>
-        <Link to='/' key='menu' onClick={() => { setMenu("menu"); scrollToMid(); }} className={menu === "menu" ? "active" : ""}>menu</Link> 
-        <Link to='/' key='contact us' onClick={() => { setMenu("contact us"); scrollToend(); }} className={menu === "contact us" ? "active" : ""}>contact us</Link>
+        <Link
+          to='/'
+          onClick={() => { setMenu("home"); scrollToPosition(0); }}
+          className={menu === "home" ? "active" : ""}
+        >
+          Home
+        </Link>
+        <Link
+          to='/'
+          onClick={() => { setMenu("menu"); scrollToPosition(window.innerHeight / 2.7); }}
+          className={menu === "menu" ? "active" : ""}
+        >
+          Menu
+        </Link>
+        <Link
+          to='/'
+          onClick={() => { setMenu("contact us"); scrollToPosition(document.body.scrollHeight - window.innerHeight); }}
+          className={menu === "contact us" ? "active" : ""}
+        >
+          Contact Us
+        </Link>
       </ul>
       <div className="navbar-right">
         <button onClick={toggleSearchInput} style={{ border: 'none' }}>
-          <img src={assets.search_icon} alt="" />
+          <img src={assets.search_icon} alt="Search" />
         </button>
         {showSearchInput && (
           <form onSubmit={handleSearch}>
@@ -75,18 +81,18 @@ const Navbar = ({ setShowLogin }) => {
         )}
         {searchedMenuItems.length > 0 && (
           <div className="searched-menu-items">
-            {searchedMenuItems.map((item) => (
+            {searchedMenuItems.map(item => (
               <div key={item.id}>{item.name}</div>
             ))}
           </div>
         )}
         <div className="navbar-search-icon">
           <Link to='/cart'>
-            <img src={assets.basket_icon} alt="" />
+            <img src={assets.basket_icon} alt="Cart" />
           </Link>
-          <div className={getTotalCartAmount() === 0 ? "" : "dot"}></div>
+          {getTotalCartAmount() > 0 && <div className="dot"></div>}
         </div>
-        <button onClick={() => setShowLogin(true)}>sign in</button>
+        <button onClick={() => setShowLogin(true)}>Sign In</button>
       </div>
     </div>
   );

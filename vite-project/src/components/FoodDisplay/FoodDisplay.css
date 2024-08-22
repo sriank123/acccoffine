@@ -1,19 +1,18 @@
-.food-display{
-    margin-top:30px ;
+.food-display {
+    margin-top: 30px;
     background-size: cover;
     background-image: url("https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTDdSc3eA5Qn1vqIavWnJKHlIcQCqI7S1FMzw&s");
 }
 
-.food-display h2{
-    font-size: max(2vw,24px);
+.food-display h2 {
+    font-size: max(2vw, 24px);
     font-weight: 600;
 }
 
-.food-display-list{
+.food-display-list {
     display: grid;
-    grid-template-columns: repeat(auto-fill,minmax(240px,1fr));
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
     margin-top: 30px;
     gap: 30px;
     row-gap: 50px;
-
 }

@@ -5,7 +5,8 @@ import { assets } from '../../assets/assets';
 const LoginPopup = ({ setShowLogin }) => {
   const [currState, setCurState] = useState("Login");
 
-  const handleButtonClick = () => {
+  const handleButtonClick = (event) => {
+    event.preventDefault(); // Prevent form submission
     console.log("Button clicked!");
     // Add your desired action here
   };
@@ -15,12 +16,10 @@ const LoginPopup = ({ setShowLogin }) => {
       <form className="login-popup-container">
         <div className="logon-popup-title">
           <h2>{currState}</h2>
-          <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="" />
+          <img onClick={() => setShowLogin(false)} src={assets.cross_icon} alt="Close" />
         </div>
         <div className="login-popup-input">
-          {currState === "Login" ? (
-            <></>
-          ) : (
+          {currState === "Sign Up" && (
             <input type="text" placeholder='Your name' required />
           )}
           <input type="email" placeholder='Your email' required />
