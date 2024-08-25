@@ -66,8 +66,6 @@ export const assets = {
   add_icon_green,
   add_icon_white,
   remove_icon_red,
-  app_store,
-  play_store,
   linkedin_icon,
   facebook_icon,
   twitter_icon,
