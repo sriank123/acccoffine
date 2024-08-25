@@ -28,7 +28,7 @@
   margin-bottom: 10px; /* Optional */
   padding: 0;
   margin: 0;
-  background: url('/src/assets/about.png') no-repeat ;
+  background: url('/about.png') no-repeat ;
 }
 
 .about-section li {
